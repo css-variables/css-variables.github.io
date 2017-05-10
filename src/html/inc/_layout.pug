@@ -1,0 +1,54 @@
+-
+	var lang = {
+		en:{
+			key: "en",
+			Apply: "Apply",
+			Reset: "Reset",
+			Options:"Options",
+			"Select result": "Select result",
+			"View source on Github":"View source on Github",
+			page_title:"Transform CSS Custom Properties (CSS variables) syntax into a static representation online.",
+			page_title_h1:"Transform CSS Custom Properties (CSS variables) syntax into a static representation online.",
+			what_is_title: "What is it",
+			what_is_text: "Based <a href='https://github.com/MadLittleMods/postcss-css-variables'>PostCSS plugin</a> to transform CSS Custom Properties (CSS variables) syntax into a static representation. This plugin provides a future-proof way of using most of CSS variables features, including selector cascading with some caveats, because this can only see the CSS, not the potentially dynamic HTML and DOM the CSS is applied to.",
+			preserve_checkbox:"Allows you to preserve custom properties & var() usage in output.",
+			textarea_vars: "Define an list map of variables in JavaScript that will be declared at the :root scope.<br>The object keys are automatically prefixed with -- (according to CSS custom property syntax) if you do not provide it."
+		}
+	};
+	var assets_path = 'assets/';
+
+<!DOCTYPE html>
+html(lang=lang.en.key)
+	head
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+
+		link(rel="stylesheet", href="assets/css/style.css")
+		include ./_favicon.pug
+		include ./_es6.test.pug
+		block head
+	body
+		block content
+
+		block js
+
+
+		script#o_O(data-i=`{"main":"${assets['main.js']}","prism":"${assets['prism.js']}","runtime":"${assets['runtime.js']}"}`, data-i-es6=`{"main":"${assets6['main.js']}","prism":"${assets6['prism.js']}","runtime":"${assets6['runtime.js']}"}`)
+			:uglify-js
+				(function(){
+					var doc = document
+						, entry = JSON.parse(window.o_O.getAttribute('data-i' + _ES6 ))
+						, loadJS = function(f,c){
+							var _script = doc.createElement('script');
+							_script.src = 'assets/js/' + f;
+							_script.onload = c;
+							_script.async = true;
+							doc.head.appendChild(_script);
+						};
+
+					loadJS(entry.runtime, function(){
+						loadJS(entry.prism);
+						loadJS(entry.main);
+					});
+				})();
